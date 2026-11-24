@@ -1,0 +1,1086 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENHYPEN FATE | ¿Quién es tu bias?</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #08080b;
+    color: #f5edf1;
+    min-height: 100vh;
+}
+
+:root {
+    --vino: #8e183e;
+    --rosa: #d99bb7;
+    --blanco: #f5edf1;
+    --gris: #aaa0a8;
+    --negro: #08080b;
+}
+
+.fondo {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+        radial-gradient(circle at 20% 20%, #53162f55, transparent 35%),
+        radial-gradient(circle at 80% 80%, #291c4255, transparent 40%),
+        #08080b;
+}
+
+.estrellas {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    opacity: .35;
+    background-image:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(#d99bb7 1px, transparent 1px);
+    background-size: 75px 75px, 120px 120px;
+    background-position: 0 0, 40px 50px;
+}
+
+header {
+    text-align: center;
+    padding: 30px 15px;
+}
+
+.logo {
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 8px;
+    font-size: 22px;
+    color: var(--rosa);
+}
+
+.logo span {
+    color: white;
+}
+
+.contenedor {
+    width: 90%;
+    max-width: 850px;
+    margin: auto;
+    padding-bottom: 60px;
+}
+
+.pantalla {
+    display: none;
+    animation: aparecer .6s ease;
+}
+
+.pantalla.activa {
+    display: block;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.inicio {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.etiqueta {
+    color: var(--rosa);
+    letter-spacing: 5px;
+    font-size: 11px;
+    margin-bottom: 18px;
+}
+
+h1, h2, h3 {
+    font-family: 'Cormorant Garamond', serif;
+}
+
+h1 {
+    font-size: clamp(40px, 8vw, 75px);
+    letter-spacing: 5px;
+    line-height: 1;
+}
+
+h1 span {
+    display: block;
+    color: var(--rosa);
+    font-size: .55em;
+    letter-spacing: 10px;
+    margin-top: 12px;
+}
+
+.imagen-inicio {
+    width: 100%;
+    max-width: 620px;
+    height: 320px;
+    margin: 28px auto;
+    object-fit: cover;
+    border: 1px solid #8e183e;
+    box-shadow: 0 0 35px #8e183e33;
+}
+
+.descripcion {
+    color: var(--gris);
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 20px auto;
+    font-size: 14px;
+}
+
+button {
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    transition: .3s;
+}
+
+.boton-principal {
+    padding: 15px 38px;
+    background: var(--vino);
+    color: white;
+    border: 1px solid var(--rosa);
+    letter-spacing: 3px;
+    margin-top: 15px;
+}
+
+.boton-principal:hover {
+    background: #bd3568;
+    box-shadow: 0 0 25px #8e183e80;
+    transform: translateY(-2px);
+}
+
+.panel {
+    background: #101015eF;
+    border: 1px solid #5d263c;
+    padding: 35px;
+    margin-top: 20px;
+}
+
+.panel h2 {
+    text-align: center;
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.panel > p {
+    text-align: center;
+    color: var(--gris);
+    margin-bottom: 25px;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.formulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo.completo {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-size: 11px;
+    color: var(--rosa);
+    letter-spacing: 2px;
+}
+
+input, select {
+    padding: 13px;
+    background: #19171e;
+    border: 1px solid #4d3442;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: var(--rosa);
+}
+
+select option {
+    background: #19171e;
+}
+
+.centrado {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.progreso-contenedor {
+    width: 100%;
+    height: 5px;
+    background: #2c242c;
+    margin: 20px 0;
+}
+
+.progreso {
+    height: 5px;
+    background: linear-gradient(to right, #8e183e, #d99bb7);
+    width: 0%;
+    transition: .4s;
+}
+
+.numero-pregunta {
+    color: var(--rosa);
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-align: center;
+}
+
+.pregunta {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 35px;
+    text-align: center;
+    margin: 25px 0;
+    line-height: 1.2;
+}
+
+.respuestas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.respuesta {
+    padding: 17px;
+    background: #15131a;
+    color: #e9dfe5;
+    border: 1px solid #3c2935;
+    text-align: left;
+    line-height: 1.5;
+    font-size: 13px;
+}
+
+.respuesta:hover {
+    border-color: var(--rosa);
+    background: #311723;
+    transform: translateY(-2px);
+}
+
+.respuesta.seleccionada {
+    border-color: var(--rosa);
+    background: #53162f;
+}
+
+.navegacion {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+.boton-secundario {
+    padding: 12px 20px;
+    background: transparent;
+    color: var(--rosa);
+    border: 1px solid #704155;
+}
+
+.boton-secundario:hover {
+    background: #351725;
+}
+
+.resultado {
+    text-align: center;
+}
+
+.resultado .nombre {
+    font-size: 60px;
+    margin: 15px 0;
+    color: var(--rosa);
+}
+
+.resultado-foto {
+    width: 100%;
+    max-width: 450px;
+    height: 480px;
+    object-fit: cover;
+    object-position: center;
+    border: 1px solid var(--rosa);
+    box-shadow: 0 0 40px #8e183e44;
+    margin: 20px auto;
+}
+
+.resultado-texto {
+    max-width: 620px;
+    margin: 20px auto;
+    line-height: 1.9;
+    color: #d5c6d0;
+    font-size: 14px;
+}
+
+.tarjeta-resultado {
+    padding: 30px;
+    border: 1px solid #6b334d;
+    background: #100d14;
+}
+
+.datos-persona {
+    color: #b8a9b4;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 2;
+}
+
+.frase {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-style: italic;
+    color: #e5b5cc;
+    margin: 20px 0;
+}
+
+footer {
+    text-align: center;
+    color: #766671;
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding: 20px;
+}
+
+@media(max-width:600px) {
+    .formulario, .respuestas {
+        grid-template-columns: 1fr;
+    }
+
+    .panel {
+        padding: 22px;
+    }
+
+    .pregunta {
+        font-size: 29px;
+    }
+
+    .imagen-inicio {
+        height: 230px;
+    }
+
+    .resultado-foto {
+        height: 360px;
+    }
+
+    .resultado .nombre {
+        font-size: 45px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="fondo"></div>
+<div class="estrellas"></div>
+
+<header>
+    <div class="logo">ENHYPEN <span>✦</span> FATE</div>
+</header>
+
+<main class="contenedor">
+
+<!-- INICIO -->
+<section id="inicio" class="pantalla activa">
+
+    <div class="inicio">
+        <p class="etiqueta">A JOURNEY TO YOUR DESTINY</p>
+
+        <h1>FIND YOUR
+            <span>ENHYPEN BIAS</span>
+        </h1>
+
+        <img
+            src="C:\Users\AlumnoSIPC11\Desktop\pagina enhypen\imagenesenhypen\enhypen.jpg"
+            alt="ENHYPEN FATE"
+            class="imagen-inicio"
+        >
+
+        <p class="descripcion">
+            Siete destinos, siete personalidades y un vínculo
+            que quizás ya estaba escrito.
+            Descubre qué integrante de ENHYPEN conecta
+            con tu esencia, tus gustos y tu forma de ver el mundo.
+        </p>
+
+        <p class="etiqueta">20 QUESTIONS · 7 DESTINIES</p>
+
+        <button class="boton-principal" onclick="mostrar('registro')">
+            BEGIN YOUR FATE ✦
+        </button>
+    </div>
+</section>
+
+<!-- REGISTRO -->
+<section id="registro" class="pantalla">
+    <div class="panel">
+
+        <h2>Antes de comenzar...</h2>
+
+        <p>
+            Queremos conocerte un poco antes de descubrir
+            quién podría ser tu bias.
+        </p>
+
+        <form id="formulario" class="formulario">
+
+            <div class="campo">
+                <label> NOMBRE </label>
+                <input type="text" id="nombre" placeholder="Tu nombre" required>
+            </div>
+
+            <div class="campo">
+                <label> APELLIDO </label>
+                <input type="text" id="apellido" placeholder="Tu apellido" required>
+            </div>
+
+            <div class="campo">
+                <label> CUMPLEAÑOS </label>
+                <input type="date" id="cumple" required>
+            </div>
+
+            <div class="campo">
+                <label> PAÍS </label>
+                <input type="text" id="pais" placeholder="Tu país" required>
+            </div>
+
+            <div class="campo">
+                <label> ¿CÓMO TE IDENTIFICAS? </label>
+                <select id="identidad">
+                    <option value="Prefiero no decirlo">Prefiero no decirlo</option>
+                    <option value="Fan de ENHYPEN">ENGENE</option>
+                    <option value="Nueva fan">Nueva fan</option>
+                    <option value="Fan casual">Fan casual</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label> ¿CUÁNTO TIEMPO LLEVAS CON ENHYPEN? </label>
+                <select id="tiempo">
+                    <option>Acabo de conocerlos</option>
+                    <option>Menos de un año</option>
+                    <option>1 - 2 años</option>
+                    <option>3 años o más</option>
+                </select>
+            </div>
+
+            <div class="campo completo">
+                <label> ¿QUÉ CANCIÓN TE GUSTA MÁS? (OPCIONAL) </label>
+                <input type="text" id="cancion" placeholder="Tu canción favorita">
+            </div>
+
+        </form>
+
+        <div class="centrado">
+            <button class="boton-secundario" onclick="mostrar('inicio')">
+                ← Regresar
+            </button>
+
+            <button class="boton-principal" onclick="comenzar()">
+                COMENZAR TEST ✦
+            </button>
+        </div>
+
+        <p style="font-size:10px;margin-top:20px;color:#777">
+            Tus respuestas se procesan en esta página y no se envían a un servidor.
+        </p>
+    </div>
+</section>
+
+<!-- TEST -->
+<section id="test" class="pantalla">
+
+    <div class="panel">
+
+        <p class="numero-pregunta" id="contador"></p>
+
+        <div class="progreso-contenedor">
+            <div class="progreso" id="barra"></div>
+        </div>
+
+        <h2 class="pregunta" id="textoPregunta"></h2>
+
+        <div class="respuestas" id="opciones"></div>
+
+        <div class="navegacion">
+            <button class="boton-secundario" onclick="anterior()">
+                ← ANTERIOR
+            </button>
+
+            <button class="boton-secundario" onclick="siguiente()">
+                SIGUIENTE →
+            </button>
+        </div>
+
+    </div>
+</section>
+
+<!-- RESULTADO -->
+<section id="resultado" class="pantalla">
+
+    <div class="panel resultado">
+        <p class="etiqueta">YOUR DESTINY HAS BEEN REVEALED</p>
+
+        <h2>Tu bias es...</h2>
+
+        <div class="tarjeta-resultado">
+
+            <p class="etiqueta">YOUR SOUL CONNECTS WITH</p>
+
+            <h2 class="nombre" id="nombreBias"></h2>
+
+            <img id="fotoBias" class="resultado-foto" src="" alt="Tu integrante">
+
+            <p class="datos-persona" id="datosUsuario"></p>
+
+            <p class="frase" id="fraseBias"></p>
+
+            <p class="resultado-texto" id="descripcionBias"></p>
+
+        </div>
+
+        <button class="boton-principal" onclick="reiniciar()">
+            REPEAT YOUR FATE ✦
+        </button>
+
+        <button class="boton-secundario" onclick="mostrar('inicio')">
+            VOLVER AL INICIO
+        </button>
+    </div>
+
+</section>
+
+</main>
+
+<footer>
+    ENHYPEN FATE · PERSONALITY TEST · FAN PROJECT
+</footer>
+
+<script>
+
+// ==========================================
+// INTEGRANTES Y RESULTADOS
+// ==========================================
+
+const integrantes = {
+
+    Heeseung: {
+        foto: "imagenesenhypen/enhypen.jpg",
+        frase: "«Tu destino es encontrar a alguien que comprenda tu profundidad.»",
+        descripcion:
+        "Tu conexión es con Heeseung. Eres una persona que aprecia el talento, la sensibilidad y la inteligencia. Quizás eres alguien que observa más de lo que habla, que disfruta de los pequeños detalles y que tiene un lado creativo que no todos conocen. Te atraen las personas auténticas, tranquilas y con una gran pasión por lo que hacen."
+    },
+
+    Jay: {
+        foto: "imagenesenhypen/jay.jpg",
+        frase: "«El amor también se encuentra en los pequeños actos.»",
+        descripcion:
+        "Tu bias es Jay. Valoras la sinceridad, la lealtad y las personas que demuestran su cariño mediante acciones. Puedes ser alguien independiente, con carácter, que sabe lo que quiere y que se preocupa profundamente por quienes ama. Tu personalidad mezcla determinación, sensibilidad y un toque de elegancia."
+    },
+
+    Jake: {
+        foto: "imagenesenhypen/jaker.jpg",
+        frase: "«Hay personas que convierten cualquier lugar en hogar.»",
+        descripcion:
+        "Tu destino conecta con Jake. Eres una persona cálida, amigable y posiblemente alguien que disfruta hacer sentir cómodos a los demás. Te gustan las conversaciones espontáneas, reír sin razón y rodearte de personas que transmitan tranquilidad. Tu energía es cercana, sincera y luminosa."
+    },
+
+    Sunghoon: {
+        foto: "imagenesenhypen/sunghoon.jpg",
+        frase: "«Incluso los corazones más tranquilos esconden mundos enteros.»",
+        descripcion:
+        "Tu bias es Sunghoon. Te gustan las personalidades reservadas, elegantes y con un humor inesperado. Quizás no expresas todo lo que sientes inmediatamente, pero cuando confías en alguien eres genuino. Disfrutas de la tranquilidad, de los detalles y de las personas que respetan tu espacio."
+    },
+
+    Sunoo: {
+        foto: "imagenesenhypen/sunoo.jpg",
+        frase: "«La luz que compartes siempre encuentra el camino de regreso.»",
+        descripcion:
+        "Tu conexión es con Sunoo. Aprecias la alegría, la expresividad y las personas que saben transformar un día normal en algo especial. Puedes ser sensible, atento y tener una gran capacidad para notar cómo se sienten los demás. Te encanta la autenticidad y no tienes miedo de mostrar tus gustos."
+    },
+
+    Jungwon: {
+        foto: "imagenesenhypen/jungwon.jpg",
+        frase: "«Un corazón amable también puede ser un corazón fuerte.»",
+        descripcion:
+        "Tu bias es Jungwon. Tu personalidad combina responsabilidad, dulzura y determinación. Te gusta tener tus propias metas, pero también sabes escuchar y cuidar de quienes te rodean. Puedes parecer tranquilo, aunque dentro de ti exista una gran energía y curiosidad por descubrir cosas nuevas."
+    },
+
+    "Ni-ki": {
+        foto: "imagenesenhypen/niki.jpg",
+        frase: "«Nunca dejes que el mundo apague lo que te hace diferente.»",
+        descripcion:
+        "Tu destino conecta con Ni-ki. Eres alguien que valora la libertad, la creatividad y la espontaneidad. Te gusta probar cosas nuevas, expresarte a tu manera y divertirte sin preocuparte demasiado por las expectativas de los demás. Tienes una personalidad curiosa, juguetona y llena de energía."
+    }
+
+};
+
+// ==========================================
+// 20 PREGUNTAS
+// Cada respuesta asigna puntos a un integrante
+// ==========================================
+
+const preguntas = [
+
+{
+pregunta: "1. ¿Cómo sería tu día perfecto?",
+opciones: [ 
+["Escuchar música y perderme en mis pensamientos.", "Heeseung"],
+["Salir a comer algo delicioso.", "Jay"],
+["Pasar el día con mis amigos.", "Jake"],
+["Un día tranquilo viendo películas.", "Sunghoon"],
+["Ir de compras y tomar fotos bonitas.", "Sunoo"],
+["Organizar mis pendientes y después descansar.", "Jungwon"],
+["Probar algo nuevo y emocionante.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "2. ¿Qué cualidad valoras más en alguien?",
+opciones: [
+["Su talento y creatividad.", "Heeseung"],
+["Su honestidad y lealtad.", "Jay"],
+["Su amabilidad y sentido del humor.", "Jake"],
+["Su tranquilidad y misterio.", "Sunghoon"],
+["Su alegría y sensibilidad.", "Sunoo"],
+["Su responsabilidad y confianza.", "Jungwon"],
+["Su espontaneidad y autenticidad.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "3. ¿Qué plan elegirías para un fin de semana?",
+opciones: [
+["Karaoke hasta perder la noción del tiempo.", "Heeseung"],
+["Preparar algo rico en casa.", "Jay"],
+["Una salida con amigos.", "Jake"],
+["Quedarme viendo una serie.", "Sunghoon"],
+["Visitar una cafetería bonita.", "Sunoo"],
+["Descansar y hacer mis cosas favoritas.", "Jungwon"],
+["Ir a un parque de diversiones.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "4. ¿Cómo reaccionas cuando conoces a alguien?",
+opciones: [
+["Primero observo y después me abro.", "Heeseung"],
+["Soy directo y digo lo que pienso.", "Jay"],
+["Intento que se sienta cómodo.", "Jake"],
+["Soy un poco reservado.", "Sunghoon"],
+["Hablo bastante cuando tengo confianza.", "Sunoo"],
+["Me comporto tranquilo y educado.", "Jungwon"],
+["Bromeo para romper el hielo.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "5. ¿Cuál es tu estilo de música favorito?",
+opciones: [
+["Baladas y canciones emocionales.", "Heeseung"],
+["Rock y canciones con fuerza.", "Jay"],
+["Pop alegre y pegadizo.", "Jake"],
+["Música relajante o elegante.", "Sunghoon"],
+["Canciones que me hagan bailar.", "Sunoo"],
+["Canciones con ritmos variados.", "Jungwon"],
+["Hip-hop y música energética.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "6. ¿Qué harías si alguien que quieres está triste?",
+opciones: [
+["Escucharlo y dejar que se desahogue.", "Heeseung"],
+["Buscar una solución para ayudarlo.", "Jay"],
+["Intentar hacerlo reír.", "Jake"],
+["Acompañarlo aunque no diga nada.", "Sunghoon"],
+["Recordarle todo lo bonito que tiene.", "Sunoo"],
+["Preguntarle qué necesita.", "Jungwon"],
+["Invitarlo a distraerse conmigo.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "7. ¿Qué ambiente te gusta más?",
+opciones: [
+["Un lugar con luces tenues y música.", "Heeseung"],
+["Una habitación acogedora.", "Jay"],
+["Un lugar lleno de gente y risas.", "Jake"],
+["Un paisaje nevado y silencioso.", "Sunghoon"],
+["Un lugar colorido y bonito.", "Sunoo"],
+["Un espacio ordenado y tranquilo.", "Jungwon"],
+["Un lugar al aire libre para explorar.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "8. ¿Qué te describe mejor?",
+opciones: [
+["Soñador/a.", "Heeseung"],
+["Determinado/a.", "Jay"],
+["Amigable.", "Jake"],
+["Reservado/a.", "Sunghoon"],
+["Expresivo/a.", "Sunoo"],
+["Responsable.", "Jungwon"],
+["Inquieto/a y curioso/a.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "9. ¿Qué regalo te haría más feliz?",
+opciones: [
+["Una playlist hecha especialmente para mí.", "Heeseung"],
+["Algo que necesito desde hace tiempo.", "Jay"],
+["Una salida sorpresa.", "Jake"],
+["Un libro o algo elegante.", "Sunghoon"],
+["Flores y una carta bonita.", "Sunoo"],
+["Algo práctico y significativo.", "Jungwon"],
+["Un objeto relacionado con mi hobby.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "10. ¿Cuál es tu mayor fortaleza?",
+opciones: [
+["Mi imaginación.", "Heeseung"],
+["Mi perseverancia.", "Jay"],
+["Mi facilidad para conectar.", "Jake"],
+["Mi paciencia.", "Sunghoon"],
+["Mi empatía.", "Sunoo"],
+["Mi disciplina.", "Jungwon"],
+["Mi creatividad.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "11. ¿Qué tipo de películas prefieres?",
+opciones: [
+["Drama y romance.", "Heeseung"],
+["Acción.", "Jay"],
+["Comedia.", "Jake"],
+["Misterio y suspenso.", "Sunghoon"],
+["Animación.", "Sunoo"],
+["Documentales.", "Jungwon"],
+["Aventura y fantasía.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "12. ¿Cómo demuestras cariño?",
+opciones: [
+["Compartiendo música.", "Heeseung"],
+["Ayudando con lo que necesite.", "Jay"],
+["Pasando tiempo juntos.", "Jake"],
+["Estando presente en silencio.", "Sunghoon"],
+["Con palabras bonitas.", "Sunoo"],
+["Recordando sus pequeños detalles.", "Jungwon"],
+["Bromeando y jugando.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "13. ¿Qué te gustaría aprender?",
+opciones: [
+["Cantar o tocar un instrumento.", "Heeseung"],
+["Cocinar mejor.", "Jay"],
+["Un nuevo idioma.", "Jake"],
+["Patinar.", "Sunghoon"],
+["Fotografía.", "Sunoo"],
+["Algo relacionado con mis estudios.", "Jungwon"],
+["Bailar.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "14. ¿Cómo eres en un grupo de amigos?",
+opciones: [
+["Me gusta hablar de temas interesantes.", "Heeseung"],
+["Soy quien da consejos.", "Jay"],
+["Soy quien hace reír.", "Jake"],
+["Observo y hago comentarios inesperados.", "Sunghoon"],
+["Expreso mucho mis emociones.", "Sunoo"],
+["Intento mantener todo organizado.", "Jungwon"],
+["Hago bromas y propongo planes.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "15. ¿Qué te atrae de una personalidad?",
+opciones: [
+["Que sea apasionada.", "Heeseung"],
+["Que sea protectora y sincera.", "Jay"],
+["Que sea alegre y cercana.", "Jake"],
+["Que tenga un lado misterioso.", "Sunghoon"],
+["Que sea expresiva y cariñosa.", "Sunoo"],
+["Que sea madura y amable.", "Jungwon"],
+["Que sea divertida y auténtica.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "16. ¿Qué harías durante unas vacaciones?",
+opciones: [
+["Visitar un lugar relacionado con la música.", "Heeseung"],
+["Probar toda la comida local.", "Jay"],
+["Explorar una ciudad con amigos.", "Jake"],
+["Visitar lugares tranquilos.", "Sunghoon"],
+["Tomar muchísimas fotos.", "Sunoo"],
+["Planear todo el itinerario.", "Jungwon"],
+["Hacer actividades aventureras.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "17. ¿Qué frase va más contigo?",
+opciones: [
+["'Siento más de lo que digo'.", "Heeseung"],
+["'Si lo hago, lo hago bien'.", "Jay"],
+["'Todo es mejor acompañado'.", "Jake"],
+["'Necesito mi espacio'.", "Sunghoon"],
+["'Quiero disfrutar cada momento'.", "Sunoo"],
+["'Siempre hay algo que mejorar'.", "Jungwon"],
+["'La vida es para experimentar'.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "18. ¿Qué prefieres?",
+opciones: [
+["Una noche de música y reflexión.", "Heeseung"],
+["Una cena deliciosa.", "Jay"],
+["Una conversación interminable.", "Jake"],
+["Una tarde de descanso.", "Sunghoon"],
+["Un día lleno de cosas bonitas.", "Sunoo"],
+["Un día productivo.", "Jungwon"],
+["Una aventura inesperada.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "19. ¿Qué color elegirías?",
+opciones: [
+["Azul oscuro.", "Heeseung"],
+["Negro.", "Jay"],
+["Verde.", "Jake"],
+["Blanco.", "Sunghoon"],
+["Rosa.", "Sunoo"],
+["Gris.", "Jungwon"],
+["Morado.", "Ni-ki"]
+]
+},
+
+{
+pregunta: "20. ¿Qué esperas de una conexión especial?",
+opciones: [
+["Comprensión sin tener que explicarlo todo.", "Heeseung"],
+["Confianza y sinceridad.", "Jay"],
+["Alegría y compañía.", "Jake"],
+["Tranquilidad y respeto.", "Sunghoon"],
+["Cariño y pequeños detalles.", "Sunoo"],
+["Apoyo y crecimiento mutuo.", "Jungwon"],
+["Diversión y libertad.", "Ni-ki"]
+]
+}
+
+];
+
+// ==========================================
+// FUNCIONAMIENTO DEL TEST
+// ==========================================
+
+let preguntaActual = 0;
+let respuestasUsuario = [];
+let puntuaciones = {};
+
+function mostrar(id) {
+
+    document.querySelectorAll(".pantalla").forEach(p => {
+        p.classList.remove("activa");
+    });
+
+    document.getElementById(id).classList.add("activa");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+function comenzar() {
+
+    const nombre = document.getElementById("nombre").value.trim();
+    const apellido = document.getElementById("apellido").value.trim();
+    const cumple = document.getElementById("cumple").value;
+    const pais = document.getElementById("pais").value.trim();
+
+    if (!nombre || !apellido || !cumple || !pais) {
+        alert("Por favor, completa los campos obligatorios.");
+        return;
+    }
+
+    preguntaActual = 0;
+    respuestasUsuario = [];
+
+    Object.keys(integrantes).forEach(nombre => {
+        puntuaciones[nombre] = 0;
+    });
+
+    mostrar("test");
+    cargarPregunta();
+}
+
+function cargarPregunta() {
+
+    const q = preguntas[preguntaActual];
+
+    document.getElementById("contador").textContent =
+        "QUESTION " + (preguntaActual + 1) + " / 20";
+
+    document.getElementById("barra").style.width =
+        ((preguntaActual + 1) / preguntas.length * 100) + "%";
+
+    document.getElementById("textoPregunta").textContent = q.pregunta;
+
+    const opciones = document.getElementById("opciones");
+    opciones.innerHTML = "";
+
+    q.opciones.forEach((opcion, index) => {
+
+        const boton = document.createElement("button");
+        boton.className = "respuesta";
+        boton.textContent = opcion[0];
+
+        if (respuestasUsuario[preguntaActual] === index) {
+            boton.classList.add("seleccionada");
+        }
+
+        boton.onclick = () => seleccionar(index);
+
+        opciones.appendChild(boton);
+    });
+}
+
+function seleccionar(index) {
+
+    respuestasUsuario[preguntaActual] = index;
+
+    cargarPregunta();
+}
+
+function siguiente() {
+
+    if (respuestasUsuario[preguntaActual] === undefined) {
+        alert("Selecciona una respuesta antes de continuar.");
+        return;
+    }
+
+    if (preguntaActual < preguntas.length - 1) {
+
+        preguntaActual++;
+        cargarPregunta();
+
+    } else {
+
+        calcularResultado();
+    }
+}
+
+function anterior() {
+
+    if (preguntaActual > 0) {
+        preguntaActual--;
+        cargarPregunta();
+    }
+}
+
+// ==========================================
+// CALCULAR RESULTADO
+// ==========================================
+
+function calcularResultado() {
+
+    // Reiniciar puntajes
+    Object.keys(integrantes).forEach(nombre => {
+        puntuaciones[nombre] = 0;
+    });
+
+    // Sumar los resultados de las 20 preguntas
+    respuestasUsuario.forEach((respuesta, indice) => {
+
+        const miembro = preguntas[indice].opciones[respuesta][1];
+
+        puntuaciones[miembro]++;
+    });
+
+    // Buscar al integrante con mayor puntuación
+    let ganador = Object.keys(puntuaciones).reduce((a, b) =>
+        puntuaciones[a] >= puntuaciones[b] ? a : b
+    );
+
+    mostrarResultado(ganador);
+}
+
+function mostrarResultado(ganador) {
+
+    const persona = integrantes[ganador];
+
+    const nombre = document.getElementById("nombre").value;
+    const apellido = document.getElementById("apellido").value;
+    const pais = document.getElementById("pais").value;
+    const cumple = document.getElementById("cumple").value;
+    const cancion = document.getElementById("cancion").value;
+
+    document.getElementById("nombreBias").textContent = ganador;
+
+    document.getElementById("fotoBias").src = persona.foto;
+
+    document.getElementById("fotoBias").alt = "Foto de " + ganador;
+
+    document.getElementById("fraseBias").textContent = persona.frase;
+
+    document.getElementById("descripcionBias").textContent =
+        persona.descripcion;
+
+    document.getElementById("datosUsuario").textContent =
+        nombre + " " + apellido +
+        " · " + pais +
+        " · " + cumple +
+        (cancion ? " · Canción favorita: " + cancion : "");
+
+    mostrar("resultado");
+}
+
+function reiniciar() {
+
+    respuestasUsuario = [];
+    preguntaActual = 0;
+
+    document.getElementById("formulario").reset();
+
+    mostrar("inicio");
+}
+
+</script>
+
+</body>
+</html>
